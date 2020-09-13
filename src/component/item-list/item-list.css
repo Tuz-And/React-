@@ -9,4 +9,5 @@
 .item-list-li{
     border: 1px solid #555;
     padding: 7px 1.25rem;
+    cursor: pointer;
 }

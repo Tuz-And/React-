@@ -8,31 +8,33 @@ export default class ItemList extends Component{
     swapiService = new SwapiService();
 
     state = {
-        planetList:null,
+        data:null,
     }
     componentDidMount(){
         this.swapiService.getAllPlanets()
-        .then((planetList)=>{
-            this.setState({planetList})
+        .then((data)=>{
+            this.setState({data})
         })
     }
     renderItem = (arr) =>{
-        console.log(arr)
+        // console.log(arr)
         return arr.map(({name,id}) => {
             return(
-                <li className='item-list-li' key={id}>
+                <li className='item-list-li' 
+                key={id}
+                onClick = {() =>this.props.onItemSelected(id)}>
                     {name}
                 </li>
             )
         })
     }
     render(){
-        const{planetList} = this.state;
+        const{data} = this.state;
        
-        if (!planetList) {
+        if (!data) {
             return <Spiner />
         } 
-        const itemList = this.renderItem(planetList);
+        const itemList = this.renderItem(data);
         return(
             <ul className='item-list'>
                 {itemList}

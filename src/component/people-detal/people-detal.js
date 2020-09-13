@@ -7,48 +7,62 @@ export default class PeopleDetal extends Component{
     swapiService = new SwapiService();
 
     state = {
-        peoples:{},
+        peoples:[], 
+        hasError:false 
+    }
+    componentDidMount(){
+        this.updataPeople();
+    }
+    updataPeople = () => {
+        const{peopleId} = this.props;
+        if(!peopleId){
+            return;
+        }
+        this.swapiService.getPeople(peopleId)
+        .then((peoples) => {
+            this.setState({peoples})
+        })
     }
     render(){
-        
+        const{id,name,hair_color,height,gender,birth_year,eye_color,mass,skin_color,homeworld} = this.state.peoples;
 
         return(
-            <div className = 'people-detal jumbotrom'>
-                <img className='people-image' src = 'https://starwars-visualguide.com/assets/img/species/2.jpg' />
+            <div className = 'people-detal jumbotrom d-flex align-items-start'>
+                <img className='people-image' alt ="error" src = {`https://starwars-visualguide.com/assets/img/species/${id}.jpg`}/>
                 <div>
-                    <h4>R2-D2</h4>
+                    <h4>{name}</h4>
                     <ul className='list-group'>
                         <li className='list-group-item'>
                             <span className = 'term'>Gender </span>
-                            <span>male</span>
+                            <span>{gender}</span>
                         </li>
                         <li className='list-group-item'>
                             <span className = 'term'>Birth Year </span>
-                            <span>43</span>
+                            <span>{birth_year}</span>
                         </li>
                         <li className='list-group-item'>
                             <span className = 'term'>Eye Color </span>
-                            <span>red</span>
+                            <span>{eye_color}</span>
                         </li>
                         <li className='list-group-item'>
                             <span className = 'term'>Height </span>
-                            <span>red</span>
+                            <span>{height}</span>
                         </li>
                         <li className='list-group-item'>
                             <span className = 'term'>Mass</span>
-                            <span>red</span>
+                            <span>{mass}</span>
                         </li>
                         <li className='list-group-item'>
                             <span className = 'term'>Hair Color </span>
-                            <span>red</span>
+                            <span>{hair_color}</span>
                         </li>
                         <li className='list-group-item'>
                             <span className = 'term'>Skin Color </span>
-                            <span>red</span>
+                            <span>{skin_color}</span>
                         </li>
                         <li className='list-group-item'>
                             <span className = 'term'>Homeworld </span>
-                            <span>red</span>
+                            <span>{homeworld}</span>
                         </li>
                     </ul>
                 </div>

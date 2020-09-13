@@ -1,50 +1,65 @@
 import React, { Component } from 'react';
-// import SwapiService from '../../service/swap-service';
+import SwapiService from '../../service/swap-service';
 
 
 import './starships-detal.css';
 
 export default class StarshipsDdetal extends Component{
+     swapiService = new SwapiService();
 
+    state ={ 
+        starship:[],
+    }
+    componentDidMount(){
+        this.updataStarships();
+    }
+    updataStarships = () => {
+        const{starshipId} =this.props;
+        if(!starshipId){
+            return;
+        }
+        this.swapiService.getStarship(starshipId)
+        .then((starship) => {
+            this.setState({starship})
+        })
+    }
     render(){
-        // swapiService = new SwapiService();
-
-
-
+       
+        const{id,name,model,manufacturer,starship_class,cost_in_credits,max_atmosphering_speed,hyperdrive_rating,length} = this.state.starship;
 
         return(
-            <div className = 'starships-detal jumbotrom'>
-                <img className='starships-image' src = 'https://starwars-visualguide.com/assets/img/starships/5.jpg' />
+            <div className = 'starships-detal jumbotrom d-flex align-items-start'>
+                <img className='starships-image' alt ="error" src = {`https://starwars-visualguide.com/assets/img/starships/${id}.jpg`} />
                 <div>
-                    <h4>Sentinel-class landing craft</h4>
+                    <h4>{name}</h4>
                     <ul className='list-group'>
                         <li className='list-group-item'>
                             <span className = 'term'>Model </span>
-                            <span>Sentinel-class landing craft </span>
+                            <span>{model} </span>
                         </li>
                         <li className='list-group-item'>
                             <span className = 'term'>Manufacturer </span>
-                            <span>Sienar Fleet Systems, </span>
+                            <span>{manufacturer} </span>
                         </li>
                         <li className='list-group-item'>
                             <span className = 'term'>Class </span>
-                            <span>Landing Craft</span>
+                            <span>{starship_class}</span>
                         </li>
                         <li className='list-group-item'>
                             <span className = 'term'>Cost </span>
-                            <span>240,000 credit</span>
+                            <span>{cost_in_credits}</span>
                         </li>
                         <li className='list-group-item'>
                             <span className = 'term'>Speed</span>
-                            <span> 1,000km/h</span>
+                            <span> {max_atmosphering_speed}</span>
                         </li>
                         <li className='list-group-item'>
                             <span className = 'term'>Hyperdrive Rating </span>
-                            <span>1.0</span>
+                            <span>{hyperdrive_rating}</span>
                         </li>
                         <li className='list-group-item'>
                             <span className = 'term'>Length </span>
-                            <span>38m</span>
+                            <span>{length}</span>
                         </li>
                     </ul>
                 </div>
