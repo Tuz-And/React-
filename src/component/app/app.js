@@ -17,17 +17,24 @@ export default class App extends Component{
         data:[],
         selectedPlanet: 2,
         selectedPeople:1,
-        // selectedStarship:4,
+        selectedStarship:4,
         hasError:false,
+        name:'starship'
     }
 
     onItemSelected = (id) =>{
         // console.log(id)
         this.setState({
             selectedPlanet:id,
+            selectedStarship:id,
             selectedPeople:id,
-            // selectedStarship:id,
+            
         })
+    }
+    onSel = (name) =>{
+        
+        this.setState({ name: name });
+        console.log('App=> ',this.state.name);
     }
     componentDidCatch(){
         this.setState({
@@ -35,9 +42,11 @@ export default class App extends Component{
         })
     }
     render(){
+        // console.log(this.props);
         if(this.state.hasError){
             return <ErrorIndicator/>
         }
+
         return(
             <div className='container'>
                 {/* header */}
@@ -50,13 +59,13 @@ export default class App extends Component{
                     <div className='col-6'>
                         {/* item list */}
                        
-                        < ItemList  onItemSelected = {this.onItemSelected}/>
+                        < ItemList  onItemSelected = {this.onItemSelected} onSel={this.state.name}/>
                     </div>
                     <div className='col-6'>
-                        < PeopleDetal peopleId = {this.state.selectedPeople} />
+                        {/* < PeopleDetal peopleId = {this.state.selectedPeople} /> */}
                         {/* persone details */}
-                        {/* < StarshipsDdetal starshipId = {this.state.selectedStarship}/> */}
-                        < PlanetDetal planetId = {this.state.selectedPlanet} />
+                        {/* < StarshipsDdetal starshipId = {this.state.selectedStarship} /> */}
+                        {/* < PlanetDetal planetId = {this.state.selectedPlanet} /> */}
                     </div>
                 </div>
 

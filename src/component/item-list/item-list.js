@@ -6,15 +6,28 @@ import Spiner from '../spiner';
 
 export default class ItemList extends Component{
     swapiService = new SwapiService();
-
+   
     state = {
         data:null,
     }
     componentDidMount(){
-        this.swapiService.getAllPlanets()
-        .then((data)=>{
+        const typeContent = this.props.onSel;
+        console.log('listItem =>  ',typeContent)
+        switch(typeContent){
+            case 'people':{ return this.swapiService.getAllPeople().then((data)=>{
             this.setState({data})
-        })
+            })}
+            case 'planet':{ return this.swapiService.getAllPlanets().then((data)=>{
+                this.setState({data})
+            })}
+            case 'starship':{ return this.swapiService.getAllStarships().then((data)=>{
+                this.setState({data})
+            })}
+        }
+        // this.swapiService.getAllPlanets()
+        // 
+        // this.swapiService.getAllPlanets()
+        
     }
     renderItem = (arr) =>{
         // console.log(arr)

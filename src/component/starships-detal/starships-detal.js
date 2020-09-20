@@ -26,7 +26,7 @@ export default class StarshipsDdetal extends Component{
     render(){
        
         const{id,name,model,manufacturer,starship_class,cost_in_credits,max_atmosphering_speed,hyperdrive_rating,length} = this.state.starship;
-
+        
         return(
             <div className = 'starships-detal jumbotrom d-flex align-items-start'>
                 <img className='starships-image' alt ="error" src = {`https://starwars-visualguide.com/assets/img/starships/${id}.jpg`} />

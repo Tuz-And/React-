@@ -47,6 +47,7 @@ export default class PlanetDetal extends Component{
                 <span> Selected Planet </span>
             )
         }
+        
         return(
             <div className = 'planet-detal jumbotrom d-flex align-items-start'>
                 <img className='planet-image' alt ="error" src = {`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`}/>
