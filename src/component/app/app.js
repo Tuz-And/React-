@@ -1,4 +1,6 @@
 import React,{Component} from 'react';
+import SwapiService from '../../service/swap-service';
+
 
 import PlanetRandom from '../planet-random';
 import Header from '../header';
@@ -13,13 +15,15 @@ import ErrorIndicator from '../error-indicator';
 import './app.css';
 
 export default class App extends Component{
+    swapiService = new SwapiService();
+
     state = {
         data:[],
         selectedPlanet: 2,
         selectedPeople:1,
         selectedStarship:4,
         hasError:false,
-        name:'starship'
+        name:'planet'
     }
 
     onItemSelected = (id) =>{
@@ -34,8 +38,28 @@ export default class App extends Component{
     onSel = (name) =>{
         
         this.setState({ name: name });
-        console.log('App=> ',this.state.name);
+         console.log('App=> ',this.state.name);
+        // this.itemSel(this.state.name);
+        //  console.log('App=> ',this.state.data);
+       
     }
+    // itemSel(typeContent){
+    //     // console.log('App=> ',typeContent);
+
+    //     switch(typeContent){
+    //         case 'people':{ return this.swapiService.getAllPeople().then((data)=>{
+    //         this.setState({data})
+    //         })}
+    //         case 'planet':{ return this.swapiService.getAllPlanets().then((data)=>{
+    //             this.setState({data})
+    //         })}
+    //         case 'starship':{ return this.swapiService.getAllStarships().then((data)=>{
+    //             this.setState({data})
+    //         })}
+    //     }
+        // console.log('App=> ',this.state.data);
+
+    // }
     componentDidCatch(){
         this.setState({
             hasError:true,
@@ -50,7 +74,8 @@ export default class App extends Component{
         return(
             <div className='container'>
                 {/* header */}
-                < Header />
+                < Header name={this.state.name}
+                    onSel={this.onSel}/>
                 
                 {/* random planet */}
                 < PlanetRandom /> 

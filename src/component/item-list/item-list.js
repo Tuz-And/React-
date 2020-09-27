@@ -12,7 +12,7 @@ export default class ItemList extends Component{
     }
     componentDidMount(){
         const typeContent = this.props.onSel;
-        console.log('listItem =>  ',typeContent)
+        console.log('listItem name=>  ',typeContent)
         switch(typeContent){
             case 'people':{ return this.swapiService.getAllPeople().then((data)=>{
             this.setState({data})
@@ -24,11 +24,12 @@ export default class ItemList extends Component{
                 this.setState({data})
             })}
         }
-        // this.swapiService.getAllPlanets()
-        // 
-        // this.swapiService.getAllPlanets()
-        
+          
     }
+
+   
+    
+    
     renderItem = (arr) =>{
         // console.log(arr)
         return arr.map(({name,id}) => {
@@ -43,11 +44,24 @@ export default class ItemList extends Component{
     }
     render(){
         const{data} = this.state;
+        // this.compo()
+
+        console.log('item list => ',data)
        
         if (!data) {
             return <Spiner />
         } 
         const itemList = this.renderItem(data);
+        
+        // const itemList = this.props.data.map((item)=>{
+        //     return(
+        //                     <li className='item-list-li' 
+        //                     key={item.id}
+        //                     onClick = {() =>this.props.onItemSelected(item.id)}>
+        //                         {item.name}
+        //                     </li>
+        //                 )
+        // });
         return(
             <ul className='item-list'>
                 {itemList}
